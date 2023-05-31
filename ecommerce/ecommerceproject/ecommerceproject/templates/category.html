@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block description %}
+    {% if category %}
+       {{category.description|truncatewords:155 }}
+    {% else %}
+      Welcome to ABC store where you can buy different items...
+
+    {% endif %}
+{% endblock %}
+{% block title %}
+{% if category %}
+       {{category.name }}-ABC Store
+    {% else %}
+      See our new collections.
+
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+{% if category %}
+   <div>
+       <div>
+           <p><a href="{% url 'shop:allProdCat' %}" Our product collection</p>
+       </div>
+   </div>
+  {% endif %}
+<div>
+    {% if category %}
+    <img src="{{category.image.url}}" alt="{{category.name}}">
+
+</div>
+<br>
+<div>
+    <h1>{{category.name}}</h1>
+    <p>{{category.description}}</p>
+</div>
+   {% else %}
+<div></div>
+<img src="{% static 'img/banner.png' %}" alt="our products">
+</div>
+<br>
+<div>
+    <h1>Our Product collections</h1>
+    <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old</p>
+</div>
+ {% endif %}
+<div>
+    <div>
+        {% for product in products %}
+        <div>
+            <a href=""><img src="{{product.image.url}}" alt="'{{product.name}}"></a>
+        <div>
+        <h4>{{product.name}}</h4>
+        <p>{{product.price}}</p>
+        </div>
+    </div>
+</div>
+{% endfor %}
+</div>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
